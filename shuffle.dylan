@@ -21,6 +21,19 @@ define method shuffle!
   sequence;
 end method shuffle!;
 
+define method shuffle!
+    (sequence :: <list>)
+ => (sequence! :: <list>)
+  for (i from 1 below sequence.size,
+       cursor = sequence.tail then sequence.tail)
+    let n = random(i);
+    let tmp = cursor.head;
+    cursor.head := sequence[n];
+    sequence[n] := tmp;
+  end for;
+  sequence;
+end method shuffle!;
+
 define generic shuffle
     (sequence :: <mutable-sequence>)
  => (sequence! :: <mutable-sequence>);
