@@ -15,7 +15,6 @@ end suite shuffle-test-suite;
 define test shuffle-size-test ()
   for (type in vector(<list>, <deque>, <array>, <vector>))
     let shuffled = shuffle(make(type, size: 4));
-    // Just make sure it works for TYPE
     check-equal(concatenate("shuffle for ", debug-name(object-class(shuffled))),
                 shuffled.size, 4);
   end for;
@@ -38,7 +37,6 @@ end test shuffle-elements-test;
 define test shuffle!-size-test ()
   for (type in vector(<list>, <deque>, <array>, <vector>))
     let shuffled = shuffle!(make(type, size: 4));
-    // Just make sure it works for TYPE
     check-equal(concatenate("shuffle! for ", debug-name(object-class(shuffled))),
                 shuffled.size, 4);
   end for;
