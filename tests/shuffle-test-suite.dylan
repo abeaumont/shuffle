@@ -16,7 +16,7 @@ define test shuffle-size-test ()
   for (type in vector(<list>, <deque>, <array>, <vector>))
     let shuffled = shuffle(make(type, size: 4));
     // Just make sure it works for TYPE
-    check-equal(concatenate("shuffle for ", debug-name(object-class(type))),
+    check-equal(concatenate("shuffle for ", debug-name(object-class(shuffled))),
                 shuffled.size, 4);
   end for;
 end test shuffle-size-test;
@@ -26,10 +26,10 @@ define test shuffle-elements-test ()
     let elements = make(type, size: 4);
     for (i from 0 below elements.size) elements[i] := i end;
     let shuffled = shuffle(elements);
-    check-equal(concatenate(debug-name(object-class(type)),
+    check-equal(concatenate(debug-name(object-class(elements)),
                             ": shuffle size = 4"),
                 shuffled.size, 4);
-    check-equal(concatenate(debug-name(object-class(type)),
+    check-equal(concatenate(debug-name(object-class(elements)),
                             ": shuffle sum = 6"),
                 reduce1(\+, shuffled), 6);
   end for;
@@ -39,7 +39,7 @@ define test shuffle!-size-test ()
   for (type in vector(<list>, <deque>, <array>, <vector>))
     let shuffled = shuffle!(make(type, size: 4));
     // Just make sure it works for TYPE
-    check-equal(concatenate("shuffle! for ", debug-name(object-class(type))),
+    check-equal(concatenate("shuffle! for ", debug-name(object-class(shuffled))),
                 shuffled.size, 4);
   end for;
 end test shuffle!-size-test;
@@ -49,10 +49,10 @@ define test shuffle!-elements-test ()
     let elements = make(type, size: 4);
     for (i from 0 below elements.size) elements[i] := i end;
     let shuffled = shuffle!(elements);
-    check-equal(concatenate(debug-name(object-class(type)),
+    check-equal(concatenate(debug-name(object-class(elements)),
                             ": shuffle! size = 4"),
                 shuffled.size, 4);
-    check-equal(concatenate(debug-name(object-class(type)),
+    check-equal(concatenate(debug-name(object-class(elements)),
                             ": shuffle! sum = 6"),
                 reduce1(\+, shuffled), 6);
   end for;
