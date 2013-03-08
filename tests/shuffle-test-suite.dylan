@@ -6,11 +6,22 @@ warranty: Distributed WITHOUT WARRANTY OF ANY KIND
 
 
 define suite shuffle-test-suite ()
+  test shuffle-type-test;
   test shuffle-size-test;
   test shuffle-sum-test;
+  test shuffle!-type-test;
   test shuffle!-size-test;
   test shuffle!-sum-test;
 end suite shuffle-test-suite;
+
+define test shuffle-type-test ()
+  for (type in vector(<list>, <deque>, <array>, <vector>))
+    let sequence = make(type, size: 4);
+    let shuffled = shuffle(sequence);
+    check-equal("shuffle types match", sequence.object-class,
+                shuffled.object-class);
+  end for;
+end test shuffle-type-test;
 
 define test shuffle-size-test ()
   for (type in vector(<list>, <deque>, <array>, <vector>))
@@ -33,6 +44,15 @@ define test shuffle-sum-test ()
                 reduce1(\+, shuffled), 6);
   end for;
 end test shuffle-sum-test;
+
+define test shuffle!-type-test ()
+  for (type in vector(<list>, <deque>, <array>, <vector>))
+    let sequence = make(type, size: 4);
+    let shuffled = shuffle!(sequence);
+    check-equal("shuffle types match", sequence.object-class,
+                shuffled.object-class);
+  end for;
+end test shuffle!-type-test;
 
 define test shuffle!-size-test ()
   for (type in vector(<list>, <deque>, <array>, <vector>))
