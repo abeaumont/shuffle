@@ -26,7 +26,7 @@ end test shuffle-type-test;
 define test shuffle-size-test ()
   for (type in vector(<list>, <deque>, <array>, <vector>))
     let shuffled = shuffle(make(type, size: 4));
-    check-equal(concatenate("shuffle for ", debug-name(object-class(shuffled))),
+    check-equal(concatenate("shuffle for ", shuffled.object-class.debug-name),
                 shuffled.size, 4);
   end for;
 end test shuffle-size-test;
@@ -36,10 +36,10 @@ define test shuffle-sum-test ()
     let sequence = make(type, size: 4);
     for (i from 0 below sequence.size) sequence[i] := i end;
     let shuffled = shuffle(sequence);
-    check-equal(concatenate(debug-name(object-class(sequence)),
+    check-equal(concatenate(sequence.object-class.debug-name,
                             ": shuffle size = 4"),
                 shuffled.size, 4);
-    check-equal(concatenate(debug-name(object-class(sequence)),
+    check-equal(concatenate(sequence.object-class.debug-name,
                             ": shuffle sum = 6"),
                 reduce1(\+, shuffled), 6);
   end for;
@@ -57,7 +57,7 @@ end test shuffle!-type-test;
 define test shuffle!-size-test ()
   for (type in vector(<list>, <deque>, <array>, <vector>))
     let shuffled = shuffle!(make(type, size: 4));
-    check-equal(concatenate("shuffle! for ", debug-name(object-class(shuffled))),
+    check-equal(concatenate("shuffle! for ", shuffled.object-class.debug-name),
                 shuffled.size, 4);
   end for;
 end test shuffle!-size-test;
@@ -67,10 +67,10 @@ define test shuffle!-sum-test ()
     let sequence = make(type, size: 4);
     for (i from 0 below sequence.size) sequence[i] := i end;
     let shuffled = shuffle!(sequence);
-    check-equal(concatenate(debug-name(object-class(sequence)),
+    check-equal(concatenate(sequence.object-class.debug-name,
                             ": shuffle! size = 4"),
                 shuffled.size, 4);
-    check-equal(concatenate(debug-name(object-class(sequence)),
+    check-equal(concatenate(sequence.object-class.debug-name,
                             ": shuffle! sum = 6"),
                 reduce1(\+, shuffled), 6);
   end for;
