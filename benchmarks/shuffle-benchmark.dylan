@@ -9,10 +9,8 @@ define function main (name :: <string>, arguments :: <vector>)
   for (fn in vector(shuffle, shuffle!))
     for (type in vector(<list>, <deque>, <array>, <vector>))
       let sequence = make(type, size: n);
+      for (i from 0 below n) sequence[i] := i + 1 end;
       profiling (cpu-time-seconds, cpu-time-microseconds)
-        for (i from 0 below n)
-          sequence[i] := i + 1;
-        end for;
         fn(sequence);
       results
         format-out("%s(%s): took %d.%s seconds\n", fn.debug-name,
