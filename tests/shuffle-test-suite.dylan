@@ -7,9 +7,9 @@ warranty: Distributed WITHOUT WARRANTY OF ANY KIND
 
 define suite shuffle-test-suite ()
   test shuffle-size-test;
-  test shuffle-elements-test;
+  test shuffle-sum-test;
   test shuffle!-size-test;
-  test shuffle!-elements-test;
+  test shuffle!-sum-test;
 end suite shuffle-test-suite;
 
 define test shuffle-size-test ()
@@ -20,19 +20,19 @@ define test shuffle-size-test ()
   end for;
 end test shuffle-size-test;
 
-define test shuffle-elements-test ()
+define test shuffle-sum-test ()
   for (type in vector(<list>, <deque>, <array>, <vector>))
-    let elements = make(type, size: 4);
-    for (i from 0 below elements.size) elements[i] := i end;
-    let shuffled = shuffle(elements);
-    check-equal(concatenate(debug-name(object-class(elements)),
+    let sequence = make(type, size: 4);
+    for (i from 0 below sequence.size) sequence[i] := i end;
+    let shuffled = shuffle(sequence);
+    check-equal(concatenate(debug-name(object-class(sequence)),
                             ": shuffle size = 4"),
                 shuffled.size, 4);
-    check-equal(concatenate(debug-name(object-class(elements)),
+    check-equal(concatenate(debug-name(object-class(sequence)),
                             ": shuffle sum = 6"),
                 reduce1(\+, shuffled), 6);
   end for;
-end test shuffle-elements-test;
+end test shuffle-sum-test;
 
 define test shuffle!-size-test ()
   for (type in vector(<list>, <deque>, <array>, <vector>))
@@ -42,16 +42,16 @@ define test shuffle!-size-test ()
   end for;
 end test shuffle!-size-test;
 
-define test shuffle!-elements-test ()
+define test shuffle!-sum-test ()
   for (type in vector(<list>, <deque>, <array>, <vector>))
-    let elements = make(type, size: 4);
-    for (i from 0 below elements.size) elements[i] := i end;
-    let shuffled = shuffle!(elements);
-    check-equal(concatenate(debug-name(object-class(elements)),
+    let sequence = make(type, size: 4);
+    for (i from 0 below sequence.size) sequence[i] := i end;
+    let shuffled = shuffle!(sequence);
+    check-equal(concatenate(debug-name(object-class(sequence)),
                             ": shuffle! size = 4"),
                 shuffled.size, 4);
-    check-equal(concatenate(debug-name(object-class(elements)),
+    check-equal(concatenate(debug-name(object-class(sequence)),
                             ": shuffle! sum = 6"),
                 reduce1(\+, shuffled), 6);
   end for;
-end test shuffle!-elements-test;
+end test shuffle!-sum-test;
