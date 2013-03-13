@@ -13,8 +13,8 @@ define function main (name :: <string>, arguments :: <vector>)
       profiling (cpu-time-seconds, cpu-time-microseconds)
         fn(sequence);
       results
-        format-out("%s(%s): took %d.%s seconds\n", fn.debug-name,
-                   sequence.object-class.debug-name, cpu-time-seconds,
+        format-out("%s(%s) of %d: took %d.%s seconds\n", fn.debug-name,
+                   sequence.object-class.debug-name, n, cpu-time-seconds,
                    integer-to-string(cpu-time-microseconds, size: 3));
       end profiling;
     end for;
