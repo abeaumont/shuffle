@@ -5,7 +5,7 @@ copyright: See LICENSE file in this distribution.
 warranty: Distributed WITHOUT WARRANTY OF ANY KIND
 
 define function main (name :: <string>, arguments :: <vector>)
-  let n = string-to-integer(element(arguments, 0, default: 1));
+  let n = string-to-integer(element(arguments, 0, default: "1"));
   for (fn in vector(shuffle, shuffle!))
     for (type in vector(<list>, <deque>, <array>, <vector>))
       let sequence = make(type, size: n);
